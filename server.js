@@ -14,7 +14,8 @@ const app = express();
 const cors = require("cors");
 
 const allowedOrigins = [
-  process.env.FRONTEND_URL        // production frontend URL
+  process.env.FRONTEND_URL,
+  "http://localhost:5173/"      // production frontend URL
 ].filter(Boolean);                 // remove undefined values
 
 app.use(
