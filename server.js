@@ -11,8 +11,6 @@ const chatRoutes = require("./routes/chat");
 const app = express();
 
 // ─── Middleware ───────────────────────────────────────────────
-const cors = require("cors");
-
 const allowedOrigins = [
   process.env.FRONTEND_URL,
   "http://localhost:5173/"      // production frontend URL
