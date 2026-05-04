@@ -11,7 +11,29 @@ const chatRoutes = require("./routes/chat");
 const app = express();
 
 // ─── Middleware ───────────────────────────────────────────────
-app.use(cors());
+const cors = require("cors");
+
+const allowedOrigins = [
+  process.env.FRONTEND_URL,        // production frontend URL
+].filter(Boolean);                 // remove undefined values
+
+app.use(
+  cors({
+    origin: (origin, callback) => {
+      // allow Postman / server-to-server (no origin)
+      if (!origin) return callback(null, true);
+
+      if (allowedOrigins.includes(origin)) {
+        callback(null, true);
+      } else {
+        callback(new Error(`CORS blocked: ${origin}`));
+      }
+    },
+    methods: ["GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS"],
+    allowedHeaders: ["Content-Type", "Authorization"],
+    credentials: true,             // if you use cookies or auth headers
+  })
+);
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use("/uploads", express.static(path.join(__dirname, "uploads")));
