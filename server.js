@@ -13,7 +13,7 @@ const app = express();
 // ─── Middleware ───────────────────────────────────────────────
 const allowedOrigins = [
   process.env.FRONTEND_URL,
-  "http://localhost:5173/"      // production frontend URL
+  "http://localhost:5173"      // production frontend URL
 ].filter(Boolean);                 // remove undefined values
 
 app.use(
@@ -29,7 +29,6 @@ app.use(
       }
     },
     methods: ["GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS"],
-    allowedHeaders: ["Content-Type", "Authorization"],
     credentials: true,             // if you use cookies or auth headers
   })
 );

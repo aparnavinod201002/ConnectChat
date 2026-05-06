@@ -66,6 +66,7 @@ console.log("inside");
     });
 
   } catch (error) {
+        console.error("LOGIN ERROR:", error); // 👈 this shows FULL error in terminal
     res.status(500).json({
       success: false,
       message: "Server error",
